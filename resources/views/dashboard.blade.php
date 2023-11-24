@@ -23,7 +23,7 @@
                                         <label for="precioKilo">Pecio:</label>
                                         <input type="number" name="precioKilo" value="precioKilo" required>
 
-                                        <button type="submit" style="border: 2px solid gray; padding: 2px; margin:2px;">guardar nueva manzana</button>
+                                        <button type="submit" style="border: 2px solid gray; padding: 2px; margin:2px;">guardar nueva </button>
                                     </form>
                                 </td>
                             </tr>
@@ -48,6 +48,7 @@
                                         <form method="POST" action="{{ route('delete', $manzana) }}">
                                             @csrf
                                             @method('DELETE')
+                                            <input type="text" name="tipoManzana" value="{{ $manzana->tipoManzana }}" hidden>
                                             <button type="submit" style="border: 2px solid gray; padding: 2px; margin:2px;">Eliminar</button>
                                         </form>
                                     </td>

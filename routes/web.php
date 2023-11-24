@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+/*añadido */
+use App\Http\Middleware\AfterMiddleware;
 use App\Http\Controllers\ManzanaController;
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ Route::middleware('auth')->group(function () {
     //metodo index() tambien funciona, indexMine lista pero ordenado, es lo mismo
     Route::get('/dashboard', [ManzanaController::class, 'indexMine'])->name('dashboard');
     Route::post('/update', [ManzanaController::class, 'update'])->name('update');
-    Route::delete('/delete/{manzana}', [ManzanaController::class, 'destroy'])->name('delete');
+    Route::delete('/delete/{manzana}', [ManzanaController::class, 'destroy'])->name('delete')->middleware([AfterMiddleware::class]);;
 });
 
 require __DIR__.'/auth.php';

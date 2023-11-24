@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ManzanaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,14 +18,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    //CRUD MANZANAS
+    Route::post('/guardar', [ManzanaController::class, 'store']);
+    //metodo index() tambien funciona, indexMine lista pero ordenado, es lo mismo
+    Route::get('/dashboard', [ManzanaController::class, 'indexMine'])->name('dashboard');
+    Route::post('/update', [ManzanaController::class, 'update'])->name('update');
+    Route::delete('/delete/{manzana}', [ManzanaController::class, 'destroy'])->name('delete');
 });
 
 require __DIR__.'/auth.php';
